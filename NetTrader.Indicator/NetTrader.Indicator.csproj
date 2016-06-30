@@ -41,9 +41,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TA-Lib-Core">
-      <HintPath>..\..\..\..\..\ta-lib-code-1562-trunk\ta-lib-code-1562-trunk\ta-lib\dotnet\src\Debug\TA-Lib-Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ADL.cs" />
