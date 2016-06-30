@@ -11,7 +11,7 @@ rsi.Load(ohlcList);
 RSISerie serie = rsi.Calculate();
 ```
 
-Including the following implementations:
+Library includes the following implementations:
 - Accumulation/Distribution (ADL) 
 - Average Directional Index (ADX)
 - Aroon
