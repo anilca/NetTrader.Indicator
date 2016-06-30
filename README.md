@@ -1,7 +1,7 @@
 # NetTrader.Indicator
 Technical anaysis library for .NET
 
-﻿Sample For Relative Strength Index (RSI) usage:
+﻿Sample for Relative Strength Index (RSI) usage:
 
 ```C#
 RSI rsi = new RSI(14);
