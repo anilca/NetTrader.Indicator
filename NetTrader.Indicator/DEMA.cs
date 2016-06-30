@@ -29,7 +29,7 @@ namespace NetTrader.Indicator
             SingleDoubleSerie demaSerie = new SingleDoubleSerie();
             EMA ema = new EMA(Period, false);
             ema.Load(OhlcList);
-            List<double?> emaValues = (ema.Calculate() as SingleDoubleSerie).Values;
+            List<double?> emaValues = ema.Calculate().Values;
 
             // assign EMA values to Close price
             for (int i = 0; i < OhlcList.Count; i++)
@@ -39,7 +39,7 @@ namespace NetTrader.Indicator
 
             ema.Load(OhlcList.Skip(Period - 1).ToList());
             // EMA(EMA(value))
-            List<double?> emaEmaValues = (ema.Calculate() as SingleDoubleSerie).Values;
+            List<double?> emaEmaValues = ema.Calculate().Values;
             for (int i = 0; i < Period - 1; i++)
             {
                 emaEmaValues.Insert(0, null);

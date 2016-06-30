@@ -42,7 +42,7 @@ namespace NetTrader.Indicator
             // EMA calculation
             EMA ema = new EMA(Period, false);
             ema.Load(OhlcList);
-            List<double?> emaValues = (ema.Calculate() as SingleDoubleSerie).Values;
+            List<double?> emaValues = ema.Calculate().Values;
             for (int i = 0; i < OhlcList.Count; i++)
             {
                 OhlcList[i].Close = emaValues[i].HasValue ? emaValues[i].Value : 0.0;
@@ -50,7 +50,7 @@ namespace NetTrader.Indicator
 
             // Double smooth
             ema.Load(OhlcList.Skip(Period - 1).ToList());
-            List<double?> doubleSmoothValues = (ema.Calculate() as SingleDoubleSerie).Values;
+            List<double?> doubleSmoothValues = ema.Calculate().Values;
             for (int i = 0; i < Period - 1; i++)
             {
                 doubleSmoothValues.Insert(0, null);
@@ -62,7 +62,7 @@ namespace NetTrader.Indicator
 
             // Triple smooth
             ema.Load(OhlcList.Skip(2 * (Period - 1)).ToList());
-            List<double?> tripleSmoothValues = (ema.Calculate() as SingleDoubleSerie).Values;
+            List<double?> tripleSmoothValues = ema.Calculate().Values;
             for (int i = 0; i < (2 * (Period - 1)); i++)
             {
                 tripleSmoothValues.Insert(0, null);
@@ -79,13 +79,13 @@ namespace NetTrader.Indicator
             {
                 ROC roc = new ROC(1);
                 roc.Load(OhlcList.Skip(3 * (Period - 1)).ToList());
-                trixSerie = (roc.Calculate() as SingleDoubleSerie);
+                trixSerie = roc.Calculate();
             }
             else
             {
                 Momentum momentum = new Momentum();
                 momentum.Load(OhlcList.Skip(3 * (Period - 1)).ToList());
-                trixSerie = (momentum.Calculate() as SingleDoubleSerie);
+                trixSerie = momentum.Calculate();
             }
 
             for (int i = 0; i < (3 * (Period - 1)); i++)

@@ -45,11 +45,11 @@ namespace NetTrader.Indicator
             
             EMA ema = new EMA(Fast, false);
             ema.Load(OhlcList);
-            List<double?> fastEmaValues = (ema.Calculate() as SingleDoubleSerie).Values;
+            List<double?> fastEmaValues = ema.Calculate().Values;
 
             ema = new EMA(Slow, false);
             ema.Load(OhlcList);
-            List<double?> slowEmaValues = (ema.Calculate() as SingleDoubleSerie).Values;
+            List<double?> slowEmaValues = ema.Calculate().Values;
 
             for (int i = 0; i < OhlcList.Count; i++)
             {
@@ -77,7 +77,7 @@ namespace NetTrader.Indicator
             int zeroCount = macdSerie.MACDLine.Where(x => x == null).Count();
             ema = new EMA(Signal, false);
             ema.Load(OhlcList.Skip(zeroCount).ToList());
-            List<double?> signalEmaValues = (ema.Calculate() as SingleDoubleSerie).Values;
+            List<double?> signalEmaValues = ema.Calculate().Values;
             for (int i = 0; i < zeroCount; i++)
             {
                 signalEmaValues.Insert(0, null);

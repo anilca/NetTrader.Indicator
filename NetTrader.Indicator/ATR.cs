@@ -58,7 +58,7 @@ namespace NetTrader.Indicator
 
             EMA ema = new EMA(Period, true);
             ema.Load(OhlcList.Skip(1).ToList());
-            List<double?> atrList = (ema.Calculate() as SingleDoubleSerie).Values;
+            List<double?> atrList = ema.Calculate().Values;
             foreach (var atr in atrList)
             {
                 atrSerie.ATR.Add(atr);

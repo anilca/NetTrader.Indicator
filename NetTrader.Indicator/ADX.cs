@@ -33,7 +33,7 @@ namespace NetTrader.Indicator
             }
             Momentum momentum = new Momentum();
             momentum.Load(tempOhlcList);
-            List<double?> highMomentums = (momentum.Calculate() as SingleDoubleSerie).Values;
+            List<double?> highMomentums = momentum.Calculate().Values;
 
             tempOhlcList = new List<Ohlc>();
             for (int i = 0; i < OhlcList.Count; i++)
@@ -43,7 +43,7 @@ namespace NetTrader.Indicator
             }   
             momentum = new Momentum();
             momentum.Load(tempOhlcList);
-            List<double?> lowMomentums = (momentum.Calculate() as SingleDoubleSerie).Values;
+            List<double?> lowMomentums = momentum.Calculate().Values;
             for (int i = 0; i < lowMomentums.Count; i++)
             {
                 if (lowMomentums[i].HasValue)
@@ -93,7 +93,7 @@ namespace NetTrader.Indicator
 
             ATR atr = new ATR();
             atr.Load(OhlcList);
-            List<double?> trueRanges = (atr.Calculate() as ATRSerie).TrueRange;
+            List<double?> trueRanges = atr.Calculate().TrueRange;
             adxSerie.TrueRange = trueRanges;
 
             List<double?> trSum = wilderSum(trueRanges);
@@ -160,7 +160,7 @@ namespace NetTrader.Indicator
 
             EMA ema = new EMA(Period, true);
             ema.Load(OhlcList.Skip(Period).ToList());
-            List<double?> emaValues = (ema.Calculate() as SingleDoubleSerie).Values;
+            List<double?> emaValues = ema.Calculate().Values;
             for (int i = 0; i < Period; i++)
             {
                 emaValues.Insert(0, null);

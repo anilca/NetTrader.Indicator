@@ -45,7 +45,7 @@ namespace NetTrader.Indicator
 
             SMA sma = new SMA(Period);
             sma.Load(OhlcList);
-            List<double?> smaList = (sma.Calculate() as SingleDoubleSerie).Values;
+            List<double?> smaList = sma.Calculate().Values;
 
             List<double?> meanDeviationList = new List<double?>();
             for (int i = 0; i < OhlcList.Count; i++)

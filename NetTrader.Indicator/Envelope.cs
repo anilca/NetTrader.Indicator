@@ -38,7 +38,7 @@ namespace NetTrader.Indicator
 
             SMA sma = new SMA(Period);
             sma.Load(OhlcList);
-            List<double?> smaList = (sma.Calculate() as SingleDoubleSerie).Values;
+            List<double?> smaList = sma.Calculate().Values;
 
             for (int i = 0; i < OhlcList.Count; i++)
             {   
