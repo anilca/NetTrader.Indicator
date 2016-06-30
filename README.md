@@ -4,11 +4,11 @@ Technical anaysis library for .NET
 ﻿Sample for Relative Strength Index (RSI) usage:
 
 ```C#
-RSI rsi = new RSI(14);
-List<Ohlc> ohlcList = new List<Ohlc>();
-// fill ohlcList
-rsi.Load(ohlcList);
-RSISerie serie = rsi.Calculate();
+  RSI rsi = new RSI(14);
+  List<Ohlc> ohlcList = new List<Ohlc>();
+  // fill ohlcList
+  rsi.Load(ohlcList);
+  RSISerie serie = rsi.Calculate();
 ```
 
 Library includes the following implementations:
