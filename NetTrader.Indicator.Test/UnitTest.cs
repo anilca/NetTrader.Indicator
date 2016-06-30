@@ -11,7 +11,6 @@ namespace NetTrader.Indicator.Test
         [TestMethod]
         public void ADL()
         {
-            // OK!
             ADL adl = new ADL();
             adl.Load(Directory.GetCurrentDirectory() + "\\table.csv");
             SingleDoubleSerie serie = adl.Calculate();
