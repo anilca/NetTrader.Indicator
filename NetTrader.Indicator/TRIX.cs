@@ -95,5 +95,6 @@ namespace NetTrader.Indicator
 
             return trixSerie;
         }
+
     }
 }
