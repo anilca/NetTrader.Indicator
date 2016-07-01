@@ -12,8 +12,8 @@ namespace NetTrader.Indicator
     public class BollingerBand : IndicatorCalculatorBase<BollingerBandSerie>
     {
         protected override List<Ohlc> OhlcList { get; set; }
-        public int Period = 20;
-        public int Factor = 2;
+        protected int Period = 20;
+        protected int Factor = 2;
 
         public BollingerBand()
         { 

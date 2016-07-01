@@ -12,8 +12,8 @@ namespace NetTrader.Indicator
     public class CCI : IndicatorCalculatorBase<SingleDoubleSerie>
     {
         protected override List<Ohlc> OhlcList { get; set; }
-        public int Period = 20;
-        public double Factor = 0.015;
+        protected int Period = 20;
+        protected double Factor = 0.015;
 
         public CCI()
         { 

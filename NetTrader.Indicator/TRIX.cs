@@ -13,8 +13,8 @@ namespace NetTrader.Indicator
     {
         protected override List<Ohlc> OhlcList { get; set; }
 
-        public int Period = 20;
-        public bool CalculatePercentage = true;
+        protected int Period = 20;
+        protected bool CalculatePercentage = true;
 
         public TRIX()
         {

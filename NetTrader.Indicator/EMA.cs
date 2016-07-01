@@ -12,8 +12,8 @@ namespace NetTrader.Indicator
     public class EMA : IndicatorCalculatorBase<SingleDoubleSerie>
     {
         protected override List<Ohlc> OhlcList { get; set; }
-        public int Period = 10;
-        public bool Wilder = false;
+        protected int Period = 10;
+        protected bool Wilder = false;
 
         public EMA()
         { 

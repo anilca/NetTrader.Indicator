@@ -12,7 +12,7 @@ namespace NetTrader.Indicator
     public class SMA : IndicatorCalculatorBase<SingleDoubleSerie>
     {
         protected override List<Ohlc> OhlcList { get; set; }
-        public int Period { get; set; }
+        protected int Period { get; set; }
 
         public SMA(int period)
         {

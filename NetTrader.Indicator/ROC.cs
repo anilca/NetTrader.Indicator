@@ -12,7 +12,7 @@ namespace NetTrader.Indicator
     public class ROC : IndicatorCalculatorBase<SingleDoubleSerie>
     {
         protected override List<Ohlc> OhlcList { get; set; }
-        public int Period { get; set; }
+        protected int Period { get; set; }
 
         public ROC(int period)
         {

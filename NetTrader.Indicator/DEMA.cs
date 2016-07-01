@@ -12,7 +12,7 @@ namespace NetTrader.Indicator
     public class DEMA : IndicatorCalculatorBase<SingleDoubleSerie>
     {
         protected override List<Ohlc> OhlcList { get; set; }
-        public int Period { get; set; }
+        protected int Period { get; set; }
 
         public DEMA(int period)
         {

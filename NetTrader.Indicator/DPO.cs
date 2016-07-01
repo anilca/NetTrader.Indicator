@@ -12,7 +12,7 @@ namespace NetTrader.Indicator
     public class DPO : IndicatorCalculatorBase<SingleDoubleSerie>
     {
         protected override List<Ohlc> OhlcList { get; set; }
-        public int Period = 10;
+        protected int Period = 10;
 
         public DPO()
         { 

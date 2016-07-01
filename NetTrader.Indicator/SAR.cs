@@ -9,8 +9,8 @@ namespace NetTrader.Indicator
     public class SAR : IndicatorCalculatorBase<SingleDoubleSerie>
     {
         protected override List<Ohlc> OhlcList { get; set; }
-        public double AccelerationFactor = 0.02;
-        public double MaximumAccelerationFactor = 0.2;
+        protected double AccelerationFactor = 0.02;
+        protected double MaximumAccelerationFactor = 0.2;
 
         public SAR()
         { 

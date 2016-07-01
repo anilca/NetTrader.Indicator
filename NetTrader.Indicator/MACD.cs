@@ -9,10 +9,10 @@ namespace NetTrader.Indicator
     public class MACD : IndicatorCalculatorBase<MACDSerie>
     {
         protected override List<Ohlc> OhlcList { get; set; }
-        public int Fast = 12;
-        public int Slow = 26;
-        public int Signal = 9;
-        public bool Percent = false;
+        protected int Fast = 12;
+        protected int Slow = 26;
+        protected int Signal = 9;
+        protected bool Percent = false;
 
         public MACD()
         { 

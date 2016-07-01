@@ -12,7 +12,7 @@ namespace NetTrader.Indicator
     public class CMF : IndicatorCalculatorBase<SingleDoubleSerie>
     {
         protected override List<Ohlc> OhlcList { get; set; }
-        public int Period = 20;
+        protected int Period = 20;
 
         public CMF()
         { 

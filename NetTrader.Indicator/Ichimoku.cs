@@ -9,9 +9,9 @@ namespace NetTrader.Indicator
     public class Ichimoku: IndicatorCalculatorBase<IchimokuSerie>
     {
         protected override List<Ohlc> OhlcList { get; set; }
-        public int Fast = 9;
-        public int Med = 26;
-        public int Slow = 26;
+        protected int Fast = 9;
+        protected int Med = 26;
+        protected int Slow = 26;
 
         public Ichimoku() 
         { 

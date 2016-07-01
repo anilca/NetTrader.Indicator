@@ -12,7 +12,7 @@ namespace NetTrader.Indicator
     public class RSI : IndicatorCalculatorBase<RSISerie>
     {
         protected override List<Ohlc> OhlcList { get; set; }
-        public int Period { get; set; }
+        protected int Period { get; set; }
 
         private List<double?> change = new List<double?>();
 
