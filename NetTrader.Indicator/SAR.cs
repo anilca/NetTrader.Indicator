@@ -57,7 +57,7 @@ namespace NetTrader.Indicator
                     break;
                 }
             }
- 
+            // TODO: needs attention, understand better and replace variable names with meaningful ones.
             /* Initialize values needed by the routine */
             int sig0 = 1, sig1 = 0;
             double xpt0 = highList[beg - 1], xpt1 = 0;
