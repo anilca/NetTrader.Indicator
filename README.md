@@ -1,5 +1,5 @@
 # NetTrader.Indicator
-Technical anaysis library for .NET
+Technical analysis library for .NET
 
 ﻿Sample for Relative Strength Index (RSI) usage:
 
