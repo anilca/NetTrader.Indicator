@@ -1,6 +1,8 @@
 # NetTrader.Indicator
 Technical analysis library for .NET
 
+Latest stable package: [![NuGet stable](https://img.shields.io/nuget/v/NetTrader.Indicator.svg?style=flat-square)](https://www.nuget.org/packages/NetTrader.Indicator)
+
 ﻿Sample for Relative Strength Index (RSI) usage:
 
 ```C#
@@ -39,6 +41,7 @@ Library includes the following implementations:
 - Weighted Moving Average (WMA)
 - Williams %R (WPR)
 - Zero Lag EMA (ZLEMA)
+
 
 
 
