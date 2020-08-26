@@ -1,100 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A4F2666D-8EA7-4E26-8513-12511C25F1C8}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NetTrader.Indicator</RootNamespace>
-    <AssemblyName>NetTrader.Indicator</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <ProjectGuid>{D9F6B967-34DA-4DB1-8DF8-1B7CE92906D0}</ProjectGuid>
+    <Company />
+    <Authors>Anil Caliskan</Authors>
+    <PackageId>NetTrader.Indicator</PackageId>
+    <RepositoryUrl>https://github.com/anilca/NetTrader.Indicator</RepositoryUrl>
+    <PackageTags>dotNet Standard 2.0 Finance Formulas Banking Bonds Corporate Markets Stocks Indicator TechnicalAnalysis Trade FinancialMarkets TechnicalIndicators C#</PackageTags>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LumenWorks.Framework.IO, Version=3.9.1.0, Culture=neutral, PublicKeyToken=5ad3ea2f85776344, processorArchitecture=MSIL">
-      <HintPath>..\packages\LumenWorksCsvReader.3.9.1\lib\net20\LumenWorks.Framework.IO.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="LumenWorksCsvReader" Version="4.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ADL.cs" />
-    <Compile Include="ADX.cs" />
-    <Compile Include="ADXSerie.cs" />
-    <Compile Include="Aroon.cs" />
-    <Compile Include="AroonSerie.cs" />
-    <Compile Include="ATR.cs" />
-    <Compile Include="ATRSerie.cs" />
-    <Compile Include="BollingerBand.cs" />
-    <Compile Include="BollingerBandSerie.cs" />
-    <Compile Include="CCI.cs" />
-    <Compile Include="CMF.cs" />
-    <Compile Include="CMO.cs" />
-    <Compile Include="DEMA.cs" />
-    <Compile Include="DPO.cs" />
-    <Compile Include="EMA.cs" />
-    <Compile Include="Envelope.cs" />
-    <Compile Include="EnvelopeSerie.cs" />
-    <Compile Include="Ichimoku.cs" />
-    <Compile Include="IchimokuSerie.cs" />
-    <Compile Include="IIndicatorSerie.cs" />
-    <Compile Include="IndicatorCalculatorBase.cs" />
-    <Compile Include="MACD.cs" />
-    <Compile Include="MACDSerie.cs" />
-    <Compile Include="Momentum.cs" />
-    <Compile Include="OBV.cs" />
-    <Compile Include="Ohlc.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PVT.cs" />
-    <Compile Include="ROC.cs" />
-    <Compile Include="RSI.cs" />
-    <Compile Include="RSISerie.cs" />
-    <Compile Include="SAR.cs" />
-    <Compile Include="SingleDoubleSerie.cs" />
-    <Compile Include="SingleIntSerie.cs" />
-    <Compile Include="SMA.cs" />
-    <Compile Include="Statistics.cs" />
-    <Compile Include="TRIX.cs" />
-    <Compile Include="Volume.cs" />
-    <Compile Include="VROC.cs" />
-    <Compile Include="WPR.cs" />
-    <Compile Include="WMA.cs" />
-    <Compile Include="ZLEMA.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
