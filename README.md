@@ -1,7 +1,5 @@
-# NetTrader.Indicator
-Technical analysis library for .NET
-
-Latest stable package: [![NuGet stable](https://img.shields.io/nuget/v/NetTrader.Indicator.svg?style=flat-square)](https://www.nuget.org/packages/NetTrader.Indicator)
+# NetTrader.Indicator [![NuGet stable](https://img.shields.io/nuget/v/NetTrader.Indicator.svg?style=flat-square)](https://www.nuget.org/packages/NetTrader.Indicator)
+Technical analysis library for .NET 
 
 ﻿Sample for Relative Strength Index (RSI) usage:
 
