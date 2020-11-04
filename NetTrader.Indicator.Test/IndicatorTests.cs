@@ -18,7 +18,7 @@ namespace NetTrader.Indicator.Test
             // read ohlc list from csv file
             List<Ohlc> ohlcList = ReadCsvFile(csvPath);
             // create a deep clone of the list
-            List<Ohlc> ohlcListDeepClone = (List<Ohlc>)Utils.DeepClone(ohlcList);
+            List<Ohlc> ohlcListDeepClone = ohlcList.DeepClone();
             // run MACD on the ohlcList
             MACD macd = new MACD(true);
             macd.Load(ohlcList);

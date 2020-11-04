@@ -5,18 +5,16 @@ namespace NetTrader.Indicator
 {
     public static class Utils
     {
-        public static object DeepClone(object obj)
+        public static T DeepClone<T>(this T obj)
         {
-            object objResult = null;
-            using (MemoryStream ms = new MemoryStream())
+            using (var ms = new MemoryStream())
             {
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(ms, obj);
-
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(ms, obj);
                 ms.Position = 0;
-                objResult = bf.Deserialize(ms);
+
+                return (T)formatter.Deserialize(ms);
             }
-            return objResult;
         }
     }
 }
