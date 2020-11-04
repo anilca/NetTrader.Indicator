@@ -32,42 +32,49 @@ namespace NetTrader.Indicator
             rsiSerie.RS.Add(null);
             rsiSerie.RSI.Add(null);
 
-            for (int i = 1; i < OhlcList.Count; i++)
+            double gainSum = 0;
+            double lossSum = 0;
+            for (int i = 1; i < Period; i++)
             {
-                if (i > this.Period)
+                double thisChange = OhlcList[i].Close - OhlcList[i - 1].Close;
+                if (thisChange > 0)
                 {
-                    int start = i - Period;
-                    double gainSum = 0;
-                    for (int j = start; j <= i; j++)
-                    {
-                        double thisChange = OhlcList[j].Close - OhlcList[j - 1].Close;
-                        if (thisChange > 0)
-                        {
-                            gainSum += thisChange;
-                        }
-                    }
-                    var averageGain = gainSum / Period;
-                    double lossSum = 0;
-                    for (int j = start; j <= i; j++)
-                    {
-                        double thisChange = OhlcList[j].Close - OhlcList[j - 1].Close;
-                        if (thisChange < 0)
-                        {
-                            lossSum += thisChange;
-                        }
-                    }
-                    var averageLoss = -1 * lossSum / Period;
-                    var rs = averageGain / averageLoss;
-                    rsiSerie.RS.Add(rs);
-                    var rsi = 100 - (100 / (1 + rs));
-                    rsiSerie.RSI.Add(rsi);
+                    gainSum += thisChange;
                 }
                 else
                 {
-                    rsiSerie.RS.Add(null);
-                    rsiSerie.RSI.Add(null);
+                    lossSum += (-1) * thisChange;
                 }
+                rsiSerie.RS.Add(null);
+                rsiSerie.RSI.Add(null);
             }
+            
+            var averageGain = gainSum / Period;
+            var averageLoss = lossSum / Period;
+            var rs = averageGain / averageLoss;
+            rsiSerie.RS.Add(rs);
+            var rsi = 100 - (100 / (1 + rs));
+            rsiSerie.RSI.Add(rsi);
+
+            for (int i = Period + 1; i < OhlcList.Count; i++)
+            {
+                double thisChange = OhlcList[i].Close - OhlcList[i - 1].Close;
+                if (thisChange > 0)
+                {
+                    averageGain = (averageGain * (Period - 1) + thisChange) / Period;
+                    averageLoss = (averageLoss * (Period - 1)) / Period;
+                }
+                else
+                {
+                    averageGain = (averageGain * (Period - 1)) / Period;
+                    averageLoss = (averageLoss * (Period - 1) + (-1) * thisChange) / Period;
+                }
+                rs = averageGain / averageLoss;
+                rsiSerie.RS.Add(rs);
+                rsi = 100 - (100 / (1 + rs));
+                rsiSerie.RSI.Add(rsi);
+            }
+
             return rsiSerie;
         }
     }
