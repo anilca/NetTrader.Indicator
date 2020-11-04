@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetTrader.Indicator
 {
+    [Serializable]
     public class Ohlc
     {
         public DateTime Date { get; set; }
