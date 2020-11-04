@@ -57,7 +57,7 @@ namespace NetTrader.Indicator
 
         public virtual void Load(List<Ohlc> ohlcList)
         {
-            this.OhlcList = ohlcList;
+            this.OhlcList = ohlcList.DeepClone();
         }
 
         public abstract T Calculate();
