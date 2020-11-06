@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetTrader.Indicator
 {
@@ -13,10 +10,12 @@ namespace NetTrader.Indicator
     {
         protected override List<Ohlc> OhlcList { get; set; }
         protected int Period { get; set; }
+        protected ColumnType ColumnType { get; set; } = ColumnType.Close;
 
-        public DEMA(int period)
+        public DEMA(int period, ColumnType columnType = ColumnType.Close)
         {
             this.Period = period;
+            this.ColumnType = columnType;
         }
 
         /// <summary>
@@ -27,14 +26,36 @@ namespace NetTrader.Indicator
         public override SingleDoubleSerie Calculate()
         {
             SingleDoubleSerie demaSerie = new SingleDoubleSerie();
-            EMA ema = new EMA(Period, false);
+            EMA ema = new EMA(Period, false, ColumnType);
             ema.Load(OhlcList);
             List<double?> emaValues = ema.Calculate().Values;
 
-            // assign EMA values to Close price
+            // assign EMA values to column
             for (int i = 0; i < OhlcList.Count; i++)
             {
-                OhlcList[i].Close = emaValues[i].HasValue ? emaValues[i].Value : 0.0;
+                switch (ColumnType)
+                {
+                    case ColumnType.AdjClose:
+                        OhlcList[i].AdjClose = emaValues[i] ?? 0.0;
+                        break;
+                    case ColumnType.Close:
+                        OhlcList[i].Close = emaValues[i] ?? 0.0;
+                        break;
+                    case ColumnType.High:
+                        OhlcList[i].High = emaValues[i] ?? 0.0;
+                        break;
+                    case ColumnType.Low:
+                        OhlcList[i].Low = emaValues[i] ?? 0.0;
+                        break;
+                    case ColumnType.Open:
+                        OhlcList[i].Open = emaValues[i] ?? 0.0;
+                        break;
+                    case ColumnType.Volume:
+                        OhlcList[i].Volume = emaValues[i] ?? 0.0;
+                        break;
+                    default:
+                        break;
+                }
             }
 
             ema.Load(OhlcList.Skip(Period - 1).ToList());

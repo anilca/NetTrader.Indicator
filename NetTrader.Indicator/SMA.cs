@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace NetTrader.Indicator
 {
@@ -13,10 +9,12 @@ namespace NetTrader.Indicator
     {
         protected override List<Ohlc> OhlcList { get; set; }
         protected int Period { get; set; }
+        protected ColumnType ColumnType { get; set; } = ColumnType.Close;
 
-        public SMA(int period)
+        public SMA(int period, ColumnType columnType = ColumnType.Close)
         {
             this.Period = period;
+            this.ColumnType = columnType;
         }
 
         /// <summary>
@@ -38,7 +36,29 @@ namespace NetTrader.Indicator
                     double sum = 0;
                     for (int j = i; j >= i - (Period - 1); j--)
                     {
-                        sum += OhlcList[j].Close;
+                        switch (ColumnType)
+                        {
+                            case ColumnType.AdjClose:
+                                sum += OhlcList[j].AdjClose;
+                                break;
+                            case ColumnType.Close:
+                                sum += OhlcList[j].Close;
+                                break;
+                            case ColumnType.High:
+                                sum += OhlcList[j].High;
+                                break;
+                            case ColumnType.Low:
+                                sum += OhlcList[j].Low;
+                                break;
+                            case ColumnType.Open:
+                                sum += OhlcList[j].Open;
+                                break;
+                            case ColumnType.Volume:
+                                sum += OhlcList[j].Volume;
+                                break;
+                            default:
+                                break;
+                        }
                     }
                     double avg = sum / Period;
                     smaSerie.Values.Add(avg);

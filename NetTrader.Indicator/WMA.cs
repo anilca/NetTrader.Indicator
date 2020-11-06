@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace NetTrader.Indicator
 {
@@ -13,10 +9,12 @@ namespace NetTrader.Indicator
     {
         protected override List<Ohlc> OhlcList { get; set; }
         protected int Period { get; set; }
+        protected ColumnType ColumnType { get; set; } = ColumnType.Close;
 
-        public WMA(int period)
+        public WMA(int period, ColumnType columnType = ColumnType.Close)
         {
             this.Period = period;
+            this.ColumnType = columnType;
         }
 
         /// <summary>
@@ -29,13 +27,6 @@ namespace NetTrader.Indicator
         /// <returns></returns>
         public override SingleDoubleSerie Calculate()
         {
-            // karşılaştırma için tutarlar ezilebilir. Bağlantı: http://fxtrade.oanda.com/learn/forex-indicators/weighted-moving-average
-            //OhlcList[0].Close = 77;
-            //OhlcList[1].Close = 79;
-            //OhlcList[2].Close = 79;
-            //OhlcList[3].Close = 81;
-            //OhlcList[4].Close = 83;
-
             SingleDoubleSerie wmaSerie = new SingleDoubleSerie();
 
             int weightSum = 0;
@@ -52,7 +43,30 @@ namespace NetTrader.Indicator
                     int weight = 1;
                     for (int j = i - (Period - 1); j <= i; j++)
                     {
-                        wma += ((double)weight / weightSum) * OhlcList[j].Close;
+                        switch (ColumnType)
+                        {
+                            case ColumnType.AdjClose:
+                                wma += ((double)weight / weightSum) * OhlcList[j].AdjClose;
+                                break;
+                            case ColumnType.Close:
+                                wma += ((double)weight / weightSum) * OhlcList[j].Close;
+                                break;
+                            case ColumnType.High:
+                                wma += ((double)weight / weightSum) * OhlcList[j].High;
+                                break;
+                            case ColumnType.Low:
+                                wma += ((double)weight / weightSum) * OhlcList[j].Low;
+                                break;
+                            case ColumnType.Open:
+                                wma += ((double)weight / weightSum) * OhlcList[j].Open;
+                                break;
+                            case ColumnType.Volume:
+                                wma += ((double)weight / weightSum) * OhlcList[j].Volume;
+                                break;
+                            default:
+                                break;
+                        }
+
                         weight++;
                     }
                     wmaSerie.Values.Add(wma);
