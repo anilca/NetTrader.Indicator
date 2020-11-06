@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace NetTrader.Indicator
 {
@@ -14,16 +10,18 @@ namespace NetTrader.Indicator
         protected override List<Ohlc> OhlcList { get; set; }
         protected int Period = 10;
         protected bool Wilder = false;
+        protected ColumnType ColumnType { get; set; } = ColumnType.Close;
 
         public EMA()
         { 
         
         }
 
-        public EMA(int period, bool wilder)
+        public EMA(int period, bool wilder, ColumnType columnType = ColumnType.Close)
         {
             this.Period = period;
             this.Wilder = wilder;
+            this.ColumnType = columnType;
         }
 
         /// <summary>
@@ -36,23 +34,6 @@ namespace NetTrader.Indicator
         /// <returns></returns>
         public override SingleDoubleSerie Calculate()
         {
-            // karşılaştırma için tutarlar ezilebilir. Bağlantı: http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_averages
-            //OhlcList[0].Close = 22.27;
-            //OhlcList[1].Close = 22.19;
-            //OhlcList[2].Close = 22.08;
-            //OhlcList[3].Close = 22.17;
-            //OhlcList[4].Close = 22.18;
-            //OhlcList[5].Close = 22.13;
-            //OhlcList[6].Close = 22.23;
-            //OhlcList[7].Close = 22.43;
-            //OhlcList[8].Close = 22.24;
-            //OhlcList[9].Close = 22.29;
-            //OhlcList[10].Close = 22.15;
-            //OhlcList[11].Close = 22.39;
-            //OhlcList[12].Close = 22.38;
-            //OhlcList[13].Close = 22.61;
-            //OhlcList[14].Close = 23.36;
-
             SingleDoubleSerie emaSerie = new SingleDoubleSerie();
             var multiplier = !this.Wilder ? (2.0 / (double)(Period + 1)) : (1.0 / (double)Period);
 
@@ -60,12 +41,35 @@ namespace NetTrader.Indicator
             {
                 if (i >= Period - 1)
                 {       
-                    var close = OhlcList[i].Close;
-                    var emaPrev = 0.0;
+                    double value = 0.0;
+                    switch (ColumnType)
+                    {
+                        case ColumnType.AdjClose:
+                            value = OhlcList[i].AdjClose;
+                            break;
+                        case ColumnType.Close:
+                            value = OhlcList[i].Close;
+                            break;
+                        case ColumnType.High:
+                            value = OhlcList[i].High;
+                            break;
+                        case ColumnType.Low:
+                            value = OhlcList[i].Low;
+                            break;
+                        case ColumnType.Open:
+                            value = OhlcList[i].Open;
+                            break;
+                        case ColumnType.Volume:
+                            value = OhlcList[i].Volume;
+                            break;
+                        default:
+                            break;
+                    }
+                    
                     if (emaSerie.Values[i - 1].HasValue)
                     {
-                        emaPrev = emaSerie.Values[i - 1].Value;
-                        var ema = (close - emaPrev) * multiplier + emaPrev;//(close * multiplier) + (emaPrev * (1 - multiplier));
+                        var emaPrev = emaSerie.Values[i - 1].Value;
+                        var ema = (value - emaPrev) * multiplier + emaPrev;
                         emaSerie.Values.Add(ema);
                     }
                     else
@@ -73,7 +77,29 @@ namespace NetTrader.Indicator
                         double sum = 0;
                         for (int j = i; j >= i - (Period - 1); j--)
                         {
-                            sum += OhlcList[j].Close;
+                            switch (ColumnType)
+                            {
+                                case ColumnType.AdjClose:
+                                    sum += OhlcList[j].AdjClose;
+                                    break;
+                                case ColumnType.Close:
+                                    sum += OhlcList[j].Close;
+                                    break;
+                                case ColumnType.High:
+                                    sum += OhlcList[j].High;
+                                    break;
+                                case ColumnType.Low:
+                                    sum += OhlcList[j].Low;
+                                    break;
+                                case ColumnType.Open:
+                                    sum += OhlcList[j].Open;
+                                    break;
+                                case ColumnType.Volume:
+                                    sum += OhlcList[j].Volume;
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                         var ema = sum / Period;
                         emaSerie.Values.Add(ema);
