@@ -25,43 +25,44 @@ namespace NetTrader.Indicator
         }
 
         /// <summary>
-        /// TrueHigh = Highest of high[0] or close[-1]
-        /// TrueLow = Highest of low[0] or close[-1]
-        /// TR = TrueHigh - TrueLow
-        /// ATR = EMA(TR)
+        /// TR = Maximum of the following 3 calculations
+        /// Method 1: Current High less the current Low
+        /// Method 2: Current High less the previous Close (absolute value)
+        /// Method 3: Current Low less the previous Close (absolute value)
+        /// ATR = [(Prior ATR x (Period -1)) + Current TR] / Period
         /// </summary>
-        /// <see cref="http://www.fmlabs.com/reference/default.htm?url=TR.htm"/>
-        /// <see cref="http://www.fmlabs.com/reference/default.htm?url=ATR.htm"/>
+        /// <see cref="https://school.stockcharts.com/doku.php?id=technical_indicators:average_true_range_atr"/>
         /// <returns></returns>
         public override ATRSerie Calculate()
         {
             ATRSerie atrSerie = new ATRSerie();
-            atrSerie.TrueHigh.Add(null);
-            atrSerie.TrueLow.Add(null);
-            atrSerie.TrueRange.Add(null);
-            atrSerie.ATR.Add(null);
 
-            for (int i = 1; i < OhlcList.Count; i++)
+            for (int i = 0; i < OhlcList.Count; i++)
             {
-                double trueHigh = OhlcList[i].High >= OhlcList[i - 1].Close ? OhlcList[i].High : OhlcList[i - 1].Close;
-                atrSerie.TrueHigh.Add(trueHigh);
-                double trueLow = OhlcList[i].Low <= OhlcList[i - 1].Close ? OhlcList[i].Low : OhlcList[i - 1].Close;
-                atrSerie.TrueLow.Add(trueLow);
-                double trueRange = trueHigh - trueLow;
-                atrSerie.TrueRange.Add(trueRange);    
-            }
-
-            for (int i = 1; i < OhlcList.Count; i++)
-            {
-                OhlcList[i].Close = atrSerie.TrueRange[i].Value;
-            }
-
-            EMA ema = new EMA(Period, true);
-            ema.Load(OhlcList.Skip(1).ToList());
-            List<double?> atrList = ema.Calculate().Values;
-            foreach (var atr in atrList)
-            {
-                atrSerie.ATR.Add(atr);
+                List<double> trueRangeList = new List<double>(3)
+                {
+                    OhlcList[i].High - OhlcList[i].Low
+                };
+                if (i > 0)
+                {
+                    trueRangeList.Add(Math.Abs(OhlcList[i].High - OhlcList[i - 1].Close));
+                    trueRangeList.Add(Math.Abs(OhlcList[i].Low - OhlcList[i - 1].Close));
+                }
+                var currentTrueRange = trueRangeList.Max();
+                atrSerie.TrueRange.Add(currentTrueRange);
+                if (i == Period - 1)
+                {
+                    atrSerie.ATR.Add(atrSerie.TrueRange.Average());
+                }
+                else if (i > Period - 1)
+                {
+                    var currentAtr = ((atrSerie.ATR.Last() * (Period - 1)) + currentTrueRange) / Period;
+                    atrSerie.ATR.Add(currentAtr);
+                }
+                else
+                {
+                    atrSerie.ATR.Add(null);
+                }
             }
 
             return atrSerie;

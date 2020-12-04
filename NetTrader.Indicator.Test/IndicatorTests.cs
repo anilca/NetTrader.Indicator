@@ -254,14 +254,52 @@ namespace NetTrader.Indicator.Test
         public void ATR()
         {
             ATR atr = new ATR();
-            atr.Load(csvPath);
+            List<Ohlc> ohlcList = new List<Ohlc>
+            {
+                new Ohlc { High = 48.70, Low = 47.79, Close = 48.16},
+                new Ohlc { High = 48.72, Low = 48.14, Close = 48.61},
+                new Ohlc { High = 48.90, Low = 48.39, Close = 48.75},
+                new Ohlc { High = 48.87, Low = 48.37, Close = 48.63},
+                new Ohlc { High = 48.82, Low = 48.24, Close = 48.74},
+                new Ohlc { High = 49.05, Low = 48.64, Close = 49.03},
+                new Ohlc { High = 49.20, Low = 48.94, Close = 49.07},
+                new Ohlc { High = 49.35, Low = 48.86, Close = 49.32},
+                new Ohlc { High = 49.92, Low = 49.50, Close = 49.91},
+                new Ohlc { High = 50.19, Low = 49.87, Close = 50.13},
+                new Ohlc { High = 50.12, Low = 49.20, Close = 49.53},
+                new Ohlc { High = 49.66, Low = 48.90, Close = 49.50},
+                new Ohlc { High = 49.88, Low = 49.43, Close = 49.75},
+                new Ohlc { High = 50.19, Low = 49.73, Close = 50.03},
+                new Ohlc { High = 50.36, Low = 49.26, Close = 50.31},
+                new Ohlc { High = 50.57, Low = 50.09, Close = 50.52},
+                new Ohlc { High = 50.65, Low = 50.30, Close = 50.41},
+                new Ohlc { High = 50.43, Low = 49.21, Close = 49.34},
+                new Ohlc { High = 49.63, Low = 48.98, Close = 49.37},
+                new Ohlc { High = 50.33, Low = 49.61, Close = 50.23}
+            };
+            atr.Load(ohlcList);
+
             ATRSerie serie = atr.Calculate();
 
             Assert.NotNull(serie);
             Assert.True(serie.ATR.Count > 0);
-            Assert.True(serie.TrueHigh.Count > 0);
-            Assert.True(serie.TrueLow.Count > 0);
             Assert.True(serie.TrueRange.Count > 0);
+
+            Assert.True(Math.Round(serie.TrueRange[13].Value, 2) == 0.46);
+            Assert.True(Math.Round(serie.TrueRange[14].Value, 2) == 1.10);
+            Assert.True(Math.Round(serie.TrueRange[15].Value, 2) == 0.48);
+            Assert.True(Math.Round(serie.TrueRange[16].Value, 2) == 0.35);
+            Assert.True(Math.Round(serie.TrueRange[17].Value, 2) == 1.22);
+            Assert.True(Math.Round(serie.TrueRange[18].Value, 2) == 0.65);
+            Assert.True(Math.Round(serie.TrueRange[19].Value, 2) == 0.96);
+
+            Assert.True(Math.Round(serie.ATR[13].Value, 2) == 0.55);
+            Assert.True(Math.Round(serie.ATR[14].Value, 2) == 0.59);
+            Assert.True(Math.Round(serie.ATR[15].Value, 2) == 0.59);
+            Assert.True(Math.Round(serie.ATR[16].Value, 2) == 0.57);
+            Assert.True(Math.Round(serie.ATR[17].Value, 2) == 0.61);
+            Assert.True(Math.Round(serie.ATR[18].Value, 2) == 0.62);
+            Assert.True(Math.Round(serie.ATR[19].Value, 2) == 0.64);
         }
 
         [Fact]
