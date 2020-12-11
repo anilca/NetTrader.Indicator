@@ -9,7 +9,7 @@ namespace NetTrader.Indicator.Test
 {
     public class IndicatorTests
     {
-        private readonly string csvPath = Directory.GetCurrentDirectory() + "\\table.csv";
+        private readonly string csvPath = Directory.GetCurrentDirectory() + "/table.csv";
 
         [Fact]
         public void IndicatorsShouldNotChangeTheSourceOhlcList()
