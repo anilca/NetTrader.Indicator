@@ -20,7 +20,7 @@ namespace NetTrader.Indicator
         
         }
 
-        public CCI(int period, int factor)
+        public CCI(int period, double factor)
         {
             this.Period = period;
             this.Factor = factor;
